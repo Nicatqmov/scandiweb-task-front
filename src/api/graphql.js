@@ -1,4 +1,4 @@
-﻿const DEFAULT_URL = 'https://nicat-qasimov.kesug.com/graphql'
+﻿const DEFAULT_URL = 'http://nicat-qasimov.kesug.com/graphql'
 
 export function getGraphqlUrl() {
   return import.meta.env?.VITE_GRAPHQL_URL || DEFAULT_URL
@@ -8,7 +8,9 @@ export async function graphqlRequest(query, variables) {
   const res = await fetch(getGraphqlUrl(), {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      // Use a "simple" request Content-Type to avoid CORS preflight (OPTIONS),
+      // which some shared hosts/WAFs block. Backend still parses JSON from body.
+      'Content-Type': 'text/plain;charset=UTF-8',
     },
     body: JSON.stringify({ query, variables }),
   })
