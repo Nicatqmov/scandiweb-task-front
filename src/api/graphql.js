@@ -1,4 +1,4 @@
-﻿const DEFAULT_URL = 'http://nicat-qasimov.kesug.com/graphql'
+﻿const DEFAULT_URL = 'https://nicat-qasimov.kesug.com/graphql'
 
 export function getGraphqlUrl() {
   return import.meta.env?.VITE_GRAPHQL_URL || DEFAULT_URL
